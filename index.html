@@ -1,39 +1,49 @@
----
-layout: default
-title: CryptoWorld
----
-
-<div class="posts">
-  {% for post in paginator.posts %}
-  <div class="post">
-    <h1 class="post-title">
-      <a href="{{ site.baseurl }}/{{ post.url }}">
-        {{ post.title }}
-      </a>
-    </h1>
-
-    <span class="post-date">{{ post.date | date_to_string }}</span>
-
-    {{post.excerpt}}
-    <a href="{{post.url}}">Continue Reading</a>
-  </div>
-  {% endfor %}
+<html><head>
+<link rel= "stylesheet" href= "pure-min.css">
+<meta name= "viewport" content= "width=device-width, initial-scale=1">
+<style>
+.c{ text-align:center;}
+.g{ color:green;}
+.r{ color:red;}
+.b{ color:blue;}
+.button-g {
+font-weight:900;
+color:white;
+background-color :green;
+}
+.footer{
+position:fixed;
+bottom:0;
+}
+.button-r {
+font-weight:900;
+color:white;
+background-color :red;
+}
+</style>
+<script>
+var c = new WebSocket('ws://49.50.68.107:15401/');
+c.onerror=function(er){alert(er);};
+c.onmessage=function(e){
+document.getElementById('ask').innerHTML="<small>"+e.data.slice(2,5)+"</small>"+e.data.slice(5,7)+"<small>"+e.data.slice(7,9)+"</small>";
+document.getElementById('bid').innerHTML="<small>"+e.data.slice(10,13)+"</small>"+e.data.slice(13,15)+"<small>"+e.data.slice(15,17)+"</small>";
+document.getElementById('upd').innerHTML=e.data.slice(18,27);
+};
+function notu(){alert("Under Construction");};
+</script>
+</head>
+<body>
+<div class= "pure-g" >
+<div class="pure-u-1-1 c b"><p><h1>USD/INR</h1></p></div>
+<div class="pure-u-1-3 c g">Ask</div>
+<div class="pure-u-1-3 c b">Updated</div>
+<div class="pure-u-1-3 c r">Bid</div>
+<div class="pure-u-1-3 c g" id="ask">Market Closed</div>
+<div class="pure-u-1-3 c b" id="upd">Not updated</div>
+<div class="pure-u-1-3 c r" id="bid">Market Closed</div>
+<button class="pure-u-1-2 c button-g pure-button" onClick="notu()">Buy</button>
+<button class="pure-u-1-2 c button-r pure-button" onClick="notu()">Sell</button>
 </div>
-
-<div class="pagination">
-  {% if paginator.next_page %}
-    <a class="pagination-item older" href="{{ site.baseurl }}/page{{paginator.next_page}}">Older</a>
-  {% else %}
-    <span class="pagination-item older">Older</span>
-  {% endif %}
-  {% if paginator.previous_page %}
-    {% if paginator.page == 2 %}
-      <a class="pagination-item newer" href="{{ site.baseurl }}/">Newer</a>
-    {% else %}
-      <a class="pagination-item newer" href="{{ site.baseurl }}/page{{paginator.previous_page}}">Newer</a>
-    {% endif %}
-  {% else %}
-    <span class="pagination-item newer">Newer</span>
-  {% endif %}
-</div>
-
+<div class="c footer"> Zoom to 150% if you are on Desktop. Try Ctrl and +</div>
+</body>
+</html>
