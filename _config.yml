@@ -1,0 +1,21 @@
+# Permalinks
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
+permalink:           pretty
+
+# Setup
+title:               CryptoWorld
+tagline:             'Crypto'
+description:         'Daily dose of crypto'
+url:                 http://cryptoworld.tk
+baseurl:             ''
+paginate:            5
+
+# About/contact
+author:
+  name:              Shivendra Kumar
+  url:               https://twitter.com/bitdumper
+  email:             bitdumper.irc@gmail.com
+
+# Custom vars
+version:             1.0.0
